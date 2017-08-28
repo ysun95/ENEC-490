@@ -6,9 +6,17 @@ file_location = "/Users/ys/Dropbox/ENEC490/NYHarborPrices.xls"
 workbook=xlrd.open_workbook(file_location)
 sheet=workbook.sheet_by_index(1)
 
+# empty array
+yearly_average = []
 
-[CODE FOR AVERAGE, but I don't really know how to comute it]
+# find index of first relevant date (january 1987)
+start = ??
 
+# append yearly averages on empty array
+for i in range(0,30):
+    avg = np.mean(  )
+    yearly_average = np.append(yearly_average,avg)
+    
 #File exported
 workbook=xlsxwriter.Workbook('YearlyAverage.xls')
 worksheet=workbook.add_worksheet()
