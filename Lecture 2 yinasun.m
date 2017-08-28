@@ -1,57 +1,38 @@
 import xlrd
 import xlsxwriter
+import numpy as np
 
-#File imported
-file_location = "/Users/ys/Dropbox/ENEC490/NYHarborPrices.xls"
-workbook=xlrd.open_workbook(file_location)
+workbook=xlrd.open_workbook('NYHarborPrices.xls')
 sheet=workbook.sheet_by_index(1)
 
+yearlyAverage=[]
+yearlyData=[]
 
-[CODE FOR AVERAGE, but I don't really know how to comute it]
+for i in range(10,369):
+    value=sheet.cell_value(i,1)
+    yearlyData.append(value)
 
-#File exported
+start = 0
+
+for i in range(0,30):
+    avg=np.mean(yearlyData[start:start+12])
+    yearlyAverage=np.append(yearlyAverage, avg)
+    start +=12
+
+finalData=np.zeros((30,2))
+finalData[0:30,0]=1987+np.arange(30)
+finalData[0:30,1]=yearlyAverage
+    
 workbook=xlsxwriter.Workbook('YearlyAverage.xls')
 worksheet=workbook.add_worksheet()
 
-averages=(
-        ['1987', 1],
-        ['1988', 2],
-        ['1989', 3],
-        ['1990', 3],
-        ['1991', 3],
-        ['1992', 3],
-        ['1993', 3],
-        ['1994', 3],
-        ['1995', 3],
-        ['1996', 3],
-        ['1997', 3],
-        ['1998', 3],
-        ['1999', 3],
-        ['2000', 3],
-        ['2001', 3],
-        ['2002', 3],
-        ['2003', 3],
-        ['2004', 3],
-        ['2005', 3],
-        ['2006', 3],
-        ['2007', 3],
-        ['2008', 3],
-        ['2009', 3],
-        ['2010', 3],
-        ['2011', 3],
-        ['2012', 3],
-        ['2013', 3],
-        ['2014', 3],
-        ['2015', 3],
-        ['2016', 3],
-        )
 row=1
 col=0
 
 worksheet.write(col,0,'Year')
 worksheet.write(col, 1, 'Average Price')
 
-for item, price in (averages):
+for item, price in (finalData):
     worksheet.write(row, col, item)
     worksheet.write(row, col+1, price)
     row +=1
