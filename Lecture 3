@@ -47,6 +47,6 @@ def monthly_stats(x):
                 output[j,i]=np.mean(x[j,:])
             else:
                 output[j,i]=np.std(x[j,:])
-    return x
+    return output
 
 y = monthly_stats(x)
