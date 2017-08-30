@@ -1,4 +1,3 @@
-import csv
 import matplotlib.pyplot as plt
 import pandas as pd 
 import numpy as np
@@ -37,6 +36,7 @@ def annual_profile(df_data):
 #call annual profile function
 x = annual_profile(df_data)
 
+#monthly stats function
 def monthly_stats(z):
     output = np.zeros((12,2))
     
@@ -47,3 +47,22 @@ def monthly_stats(z):
         return output
     
 y = monthly_stats(x)
+            
+
+#Synthetic random sample for April 
+synA=np.random.normal(y[3,0],y[3,1],1000)
+
+#Synthetic random sample for January
+synB=np.random.normal(y[0,0],y[0,1],1000)
+
+#graph the histograms
+plt.figure()
+plt.hist(synA)
+plt.hist(synB)
+
+plt.figure()
+plt.hist(x[3,:])
+plt.hist(x[0,:])
+
+
+#What looks weird? There are negative prices in the synthetic model.
