@@ -74,3 +74,11 @@ RM = ((25000-demand_simulation)/25000)*100
 
 plt.figure()
 plt.hist(RM)
+
+#what is the chance that RM are less than 15%?
+
+RM_below15 = RM[RM<=15]
+
+percent_below15 = len(RM_below15)/len(RM)
+
+#this value is around 94%...so, a majority of the RMs are below 15%. Thus, they should definitely build the plant.
